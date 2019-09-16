@@ -40,4 +40,5 @@ group :test do
   gem 'faker'
   gem 'fabrication'
   gem 'database_cleaner'
+  gem 'shoulda-matchers'
 end

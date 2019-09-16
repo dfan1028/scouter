@@ -3,6 +3,9 @@
 module Products
   module Browser
     class Base
+      PageNotFound  = Class.new(StandardError)
+      NoMoreRetries = Class.new(StandardError)
+      InvalidExtId  = Class.new(StandardError)
 
       # ie, edge do not support headless
       BROWSERS = %i(
@@ -10,7 +13,7 @@ module Products
         firefox
       )
 
-      ERRORS = [
+      BROWSER_ERRORS = [
         Selenium::WebDriver::Error::SessionNotCreatedError,
         Selenium::WebDriver::Error::UnknownError,
         Net::ReadTimeout
@@ -21,6 +24,8 @@ module Products
       def initialize(ext_id:, use_proxy: false)
         @ext_id = ext_id
         @use_proxy = use_proxy
+
+        validate_ext_id
       end
 
       def get_browser(retries = 3)
@@ -29,13 +34,13 @@ module Products
         browser.goto(product_url)
 
         if not_found?(browser.title)
-          raise Products::Errors::PageNotFound.new("Page Not Found")
+          raise PageNotFound.new("Page Not Found")
         end
 
         browser
-      rescue *ERRORS => e
+      rescue *BROWSER_ERRORS => e
         if retries.zero?
-          raise Products::Errors::NoMoreRetries.new("Out of retries :(")
+          raise NoMoreRetries.new("Out of retries :(")
         else
           if use_proxy
             ProxyFinder.remove_proxy(proxy.http)
@@ -77,6 +82,12 @@ module Products
 
       def user_agent
         BROWSERS.sample
+      end
+
+      def validate_ext_id
+        unless valid_ext_id?
+          raise InvalidExtId.new("External ID provided is invalid")
+        end
       end
 
     end

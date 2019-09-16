@@ -19,32 +19,41 @@ class Products extends Component {
       })
   }
 
+  setSubmitDisabled = (isDisabled) => {
+    this.setState({ submitDisabled: isDisabled });
+  }
+
+  setResponseMessage = (message) => {
+    this.setState({ responseMessage: message });
+  }
+
   deleteProduct = (id) => {
+    this.setResponseMessage("");
+
     axios
       .delete(`/api/products/${id}`)
       .then(response => {
-        if (response.data.success) {
-          this.setState({ products: [...this.state.products.filter(product => product.id !== id)] });
-        } else {
-          this.setState({ responseMessage: response.data.errors });
-        }
+        this.setState({ products: [...this.state.products.filter(product => product.id !== id)] });
       })
+      .catch(error => {
+        this.setResponseMessage(error.response.data.errors);
+      });
   }
 
   createProduct = (productParams) => {
-    this.setState({ submitDisabled: true });
+    this.setSubmitDisabled(true);
+    this.setResponseMessage("");
 
     axios
       .post('/api/products', productParams)
       .then(response => {
-        if (response.data.success) {
-          this.setState({ products: [...this.state.products, response.data.success.product]});
-        } else {
-          this.setState({ responseMessage: response.data.errors });
-        }
-
-        this.setState({ submitDisabled: false });
+        this.setState({ products: [...this.state.products, response.data.success.product]});
+        this.setSubmitDisabled(false);
       })
+      .catch(error => {
+        this.setResponseMessage(error.response.data.errors);
+        this.setSubmitDisabled(false);
+      });
   }
 
   render() {

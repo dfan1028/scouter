@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  namespace :api, default: { format: 'json' } do
+  namespace :api do
     resources :products, only: [:index, :create, :destroy]
   end
 

@@ -7,7 +7,7 @@ class API::ProductsController < ApplicationController
   def create
     product = manager.create_or_update
 
-    if product.valid?
+    if product.errors.blank? && product.persisted?
       render json: { success: { product: product } }
     else
       render json: {

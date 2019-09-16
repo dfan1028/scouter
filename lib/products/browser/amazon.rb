@@ -12,6 +12,10 @@ module Products
         !!(title =~ /Page Not Found/)
       end
 
+      def valid_ext_id?
+        !!(ext_id =~ /^[a-zA-Z0-9]*$/)
+      end
+
     end
   end
 end
