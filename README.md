@@ -1,6 +1,6 @@
 # Scouter
 
-Welcome to `scouter`! This application fetches a product from amazon, given the ASIN and saves/displays it for your viewing convenience!
+Welcome to `scouter`! This rails application fetches a product from amazon, given the ASIN and saves/displays it for your viewing convenience!
 
 ## Development
 
@@ -38,7 +38,7 @@ rvm install ruby-2.6.4 && rvm use 2.6.4
 
 Run setup in `bin/setup` for creating a new database and bundling gems
 
-4. Now navigate away to localhost:3000!
+4. Now navigate away to `localhost:3000`!
 
 ```
 rails s
@@ -50,13 +50,11 @@ Run tests with `bundle exec rspec`
 
 ## Usage
 
-Enter the desired ASIN to be fetched from Amazon and press the `Retrieve Product Information!` button! You can also check the use proxy checkbox to enable fetching with proxies, but this will slow down the fetch.
-
-
+Navigate to the `Products` page using the link in the top bar. Enter the desired ASIN to be fetched from Amazon and press the `Retrieve Product Information!` button! You can also check the use proxy checkbox to enable fetching with proxies, but this will slow down the fetch.
 
 ## Implementation Details
 
 - Abstracted ASIN to `ext_id` so any platform can be included
-- Using `watir` and `webdrivers` for fetching page elements
-- Proxies can be enabled when fetching a product. It will take longer to fetch the product
+- Using `watir` and `webdrivers` for fetching page elements, only chrome and firefox support headless browsing
+- Proxies can be enabled when fetching a product, but it will take longer to fetch
 - Fetching the product will attempt to try 3 times with a default 30 second timeout
