@@ -1,5 +1,7 @@
 # Scouter
 
+[![CircleCI](https://circleci.com/gh/dfan1028/scouter.svg?style=svg)](https://circleci.com/gh/dfan1028/scouter)
+
 Welcome to `scouter`! This rails application fetches a product from amazon, given the ASIN and saves/displays it for your viewing convenience!
 
 ## Development
