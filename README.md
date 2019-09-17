@@ -38,17 +38,22 @@ rvm install ruby-2.6.4 && rvm use 2.6.4
 
 3. Database!! Gems!!!! and starting it up
 
-Run setup in `bin/setup` for creating a new database and bundling gems
+Run setup in `bin/setup` for creating a new database and bundling gems. You may need to check `yarn` separately `yarn install --check-files`.
 
 4. Now navigate away to `localhost:3000`!
 
 ```
-rails s
+bundle exec rails s
 ```
 
 ## Specs
 
-Run tests with `bundle exec rspec`
+Run tests with
+
+```
+RAILS_ENV=test rails db:setup
+bundle exec rspec
+```
 
 ## Usage
 

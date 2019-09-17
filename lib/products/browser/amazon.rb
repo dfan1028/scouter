@@ -12,6 +12,7 @@ module Products
         !!(title =~ /Page Not Found/)
       end
 
+      # Amazon ASINs are alphanumeric ONLY
       def valid_ext_id?
         !!(ext_id =~ /^[a-zA-Z0-9]*$/)
       end
