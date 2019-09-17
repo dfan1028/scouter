@@ -59,6 +59,8 @@ bundle exec rspec
 
 Navigate to the `Products` page using the link in the top bar. Enter the desired ASIN to be fetched from Amazon and press the `Retrieve Product Information!` button! You can also check the use proxy checkbox to enable fetching with proxies, but this will slow down the fetch.
 
+** Note: Proxies used in this app are not that reliable since it is sourced from a public API where others might have tarnished it already, and the proxy list is only refreshed once per hour. If you absolutely need to always use proxies, please find a reliable proxy source!
+
 ## Implementation Details
 
 - Abstracted ASIN to `ext_id` so any platform can be included
