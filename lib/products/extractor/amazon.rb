@@ -14,7 +14,8 @@ module Products
       private
 
       def category
-        text = details&.match(/^#\d.+/)&.to_s
+        text = details&.match(/^#\d.+/) || details&.match(/#\d.+/)
+        text = text&.to_s
 
         if text.present?
           text.split(" in ").last.strip
@@ -30,7 +31,8 @@ module Products
       end
 
       def rank
-        text = details&.match(/^#\d+/)&.to_s
+        text = details&.match(/^#\d+/) || details&.match(/#\d+/)
+        text = text&.to_s
 
         if text.present?
           text.gsub("#", "").strip
