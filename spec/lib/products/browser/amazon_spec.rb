@@ -21,6 +21,14 @@ RSpec.describe Products::Browser::Amazon do
         }.to raise_error(Products::Browser::Base::InvalidExtId)
       end
     end
+
+    context 'ext_id is blank' do
+      it 'raises error' do
+        expect {
+          described_class.new(ext_id: '')
+        }.to raise_error(Products::Browser::Base::InvalidExtId)
+      end
+    end
   end
 
   describe 'get_browser' do
